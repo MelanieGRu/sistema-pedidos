@@ -1,11 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Radio+Canada&family=Roboto+Slab&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Radio+Canada&family=Roboto+Slab&display=swap');
 
 :root {
   --principal: #01497c;
   --negro: black;
   --blanco: #ffffff;
   --rojo: red;
-  --fuente-radio: "Radio Canada", sans-serif;
+  --fuente-radio: 'Radio Canada', sans-serif;
 }
 
 html,
