@@ -103,7 +103,7 @@ export default function Home() {
             En esta sección se pueden agregar, editar y eliminar usuarios.
           </Text>
 
-          <Link href='/inventario'>
+          <Link href='/usuarios'>
             <Button variant='light' color='blue' fullWidth mt='md' radius='md'>
               Modificar usuarios
             </Button>
