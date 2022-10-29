@@ -1,5 +1,6 @@
 import { Button, TextInput, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { useState } from 'react';
 import styles from '../styles/FormularioCategorias.module.css';
 
 const FormularioCategorias = () => {
@@ -7,14 +8,21 @@ const FormularioCategorias = () => {
     initialValues: { categoria: '' },
 
     validate: {
-      categoria: (value) => (value !== '' ? 'Debe introducir un nombre' : null),
+      categoria: (value) => (value === '' ? 'Debe introducir un nombre' : null),
     },
   });
+
+  const { categoria } = form.values;
+
+  const guardarCategoria = () => {
+    const categoriaTemp = categoria;
+    console.log(categoriaTemp);
+  };
 
   return (
     <div className={styles.formulario}>
       <Title align='center'>Crear nueva categoría</Title>
-      <form onSubmit={form.onSubmit(console.log)}>
+      <form onSubmit={form.onSubmit(guardarCategoria)}>
         <TextInput
           label='Nombre'
           placeholder='Nombre de la categoría'

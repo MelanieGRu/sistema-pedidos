@@ -10,13 +10,9 @@ import { useAuth } from '../context/AuthContext';
 export default function Home() {
   const { user, signup } = useAuth();
 
-  // if (user === null) {
-  //   return (
-  //     <Layout>
-  //       <Login />
-  //     </Layout>
-  //   );
-  // }
+  if (user === null) {
+    return <Login />;
+  }
 
   return (
     <Layout>
