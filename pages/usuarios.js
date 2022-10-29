@@ -12,19 +12,14 @@ import { useState } from "react";
 
 import Layout from "../components/Layout";
 import styles from "../styles/Usuarios.module.css";
-import { useAuth } from "../context/AuthContext";
-import { fetcher } from "../lib/api";
+
 import FormularioRegistrar from "../components/FormularioRegistrar";
 import ListaUsuarios from "../components/ListaUsuarios";
 
 const Usuarios = ({ usuarios }) => {
-  const { user, signup } = useAuth();
-
-  console.log(usuarios);
-
   return (
     <Layout>
-      <FormularioRegistrar />
+      <FormularioRegistrar usuarios={usuarios} />
       <h1 className={styles.titulo}>Cuentas Creadas</h1>
       <ListaUsuarios usuarios={usuarios} />
     </Layout>
@@ -34,14 +29,12 @@ const Usuarios = ({ usuarios }) => {
 export default Usuarios;
 
 export async function getStaticProps() {
-  console.log("HI");
-  const usuariosRes = await fetcher(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/usuarios`
-  );
-  console.log(usuariosRes);
+  const res = await fetch("http://localhost:1337/usuarios");
+  const usuarios = await res.json();
+
   return {
     props: {
-      usuarios: usuariosRes,
+      usuarios,
     },
   };
 }

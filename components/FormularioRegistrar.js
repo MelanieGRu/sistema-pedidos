@@ -1,5 +1,6 @@
 import { useForm } from "@mantine/form";
 import { IconX, IconCheck } from "@tabler/icons";
+import axios from "axios";
 import {
   NumberInput,
   TextInput,
@@ -12,13 +13,14 @@ import { useState } from "react";
 
 import Layout from "../components/Layout";
 import styles from "../styles/Usuarios.module.css";
+import Router from "next/router";
+import Usuarios from "../pages/usuarios";
 import { useAuth } from "../context/AuthContext";
-import { fetcher } from "../lib/api";
 
-const FormularioRegistrar = () => {
+const FormularioRegistrar = ({ usuarios }) => {
+  const { crearCuenta } = useAuth();
   const [mensajeError, setMensajeError] = useState(null);
   const [mensajeCuentaCreada, setMensajeCuentaCreada] = useState(null);
-
   const form = useForm({
     initialValues: {
       nombre: "",
@@ -39,6 +41,7 @@ const FormularioRegistrar = () => {
     const telefono = form.values["telefono"];
     const clave = form.values["clave"];
     const rol = form.values["rol"];
+    let cuentaExiste = false;
 
     if (
       nombre === "" ||
@@ -52,25 +55,27 @@ const FormularioRegistrar = () => {
       return;
     }
 
-    try {
-      await signup(correo, clave);
+    usuarios.forEach(function (usuario) {
+      if (usuario["correo"] === correo) {
+        setMensajeError("Ya existe una cuenta con ese correo electrónico");
+        cuentaExiste = true;
+      }
+    });
 
-      setMensajeError(null);
-      setMensajeCuentaCreada("Cuenta ha sido creada");
+    if (cuentaExiste) {
       return;
-    } catch (error) {
-      if (error.code === "auth/invalid-email") {
-        setMensajeError("Correo electrónico es invalido");
-        return;
-      }
-      if (error.code === "auth/email-already-in-use") {
-        setMensajeError("Ya existe usuario con ese correo electrónico");
-      }
-      if (error.code === "auth/weak-password") {
-        setMensajeError("Contraseña debe tener por lo menos 6 caracteres");
-      }
-      console.log(error.code);
     }
+
+    let datos = {
+      nombre: nombre,
+      correo: correo,
+      perfil: perfil,
+      telefono: telefono,
+      clave: clave,
+      rol: rol,
+    };
+
+    crearCuenta(datos);
   };
 
   return (
@@ -91,6 +96,7 @@ const FormularioRegistrar = () => {
         <TextInput
           className={styles.formulario__input}
           placeholder="correo@ejemplo.com"
+          type="email"
           {...form.getInputProps("correo")}
         />
       </div>

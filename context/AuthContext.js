@@ -1,50 +1,92 @@
-import { createContext, useContext, useEffect } from "react";
-import {
-  onAuthStateChanged,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  updateProfile,
-} from "firebase/auth";
-import { useState } from "react";
-import { auth } from "../config/firebase";
+import { createContext, useContext, useEffect, useState } from "react";
+import Router from "next/router";
+import axios from "axios";
+import { LoadingOverlay } from "@mantine/core";
 
 const AuthContext = createContext({});
+
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  console.log(user);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser({
-          email: user.email,
-        });
-      } else {
-        setUser(null);
+  const login = async (correo, clave) => {
+    const res = await fetch("http://localhost:1337/usuarios");
+    const usuarios = await res.json();
+
+    let entro = false;
+    setLoading(true);
+    // Revisando si existe un usuario con la combinacion de correo y contraseña
+    usuarios.forEach(function (usuario) {
+      if (
+        usuario["correo"] === correo &&
+        usuario["clave"] === clave &&
+        usuario["rol"] === "admin"
+      ) {
+        setUser(usuario);
+        entro = true;
+        return;
       }
     });
-
-    return () => unsubscribe();
-  }, []);
-
-  const signup = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password);
+    setLoading(false);
+    console.log(entro);
+    return entro;
   };
 
-  const login = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password);
-  };
-
-  const logout = async () => {
+  const logout = () => {
     setUser(null);
-    await signOut(auth);
+    Router.push("/");
+  };
+
+  const modificar = (id, nuevosDatos, setUsuarios) => {
+    setLoading(true);
+    axios
+      .put(`http://localhost:1337/usuarios/${id}`, nuevosDatos)
+      .then((response) => {
+        setUser(nuevosDatos);
+        setLoading(false);
+        Router.push("/usuarios");
+      });
+  };
+
+  const eliminar = (id) => {
+    setLoading(true);
+    axios.delete(`http://localhost:1337/usuarios/${id}`).then(() => {
+      setLoading(false);
+      if (user["id"] === id) {
+        setUser(null);
+        Router.push("/");
+        return;
+      }
+      Router.push("/usuarios");
+    });
+  };
+
+  const crearCuenta = (datos) => {
+    setLoading(true);
+    axios.post("http://localhost:1337/usuarios", datos).then((response) => {
+      // Recarga la pagina para que se actualize la table de usuarios
+      setLoading(false);
+      Router.push("/usuarios");
+    });
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout }}>
-      {children}
+    <AuthContext.Provider
+      value={{ user, login, logout, modificar, eliminar, crearCuenta }}
+    >
+      {loading ? (
+        <LoadingOverlay
+          loaderProps={{ size: "sm", color: "blue", variant: "bars" }}
+          overlayOpacity={0.3}
+          overlayColor="#c5c5c5"
+          visible
+        />
+      ) : (
+        children
+      )}
     </AuthContext.Provider>
   );
 };

@@ -12,7 +12,7 @@ table.minimalistBlack th {
   padding: 5px 4px;
 }
 table.minimalistBlack tbody td {
-  font-size: 13px;
+  font-size: 16px;
 }
 table.minimalistBlack thead {
   background: #cfcfcf;
@@ -34,4 +34,9 @@ table.minimalistBlack thead th {
 }
 table.minimalistBlack tfoot td {
   font-size: 14px;
+}
+
+.editar {
+  display: flex;
+  justify-content: space-around;
 }

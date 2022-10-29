@@ -7,11 +7,16 @@ import Layout from '../components/Layout';
 import styles from '../styles/Index.module.css';
 import { useAuth } from '../context/AuthContext';
 
-export default function Home() {
-  const { user, signup } = useAuth();
+export default function Home({ usuarios }) {
+  const { user } = useAuth();
+  console.log(usuarios);
 
   if (user === null) {
-    return <Login />;
+    return (
+      <Layout>
+        <Login usuarios={usuarios} />
+      </Layout>
+    );
   }
 
   return (
@@ -120,4 +125,15 @@ export default function Home() {
       </div>
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  const res = await fetch('http://localhost:1337/usuarios');
+  const usuarios = await res.json();
+
+  return {
+    props: {
+      usuarios,
+    },
+  };
 }
