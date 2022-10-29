@@ -6,15 +6,17 @@ import {
   Button,
   UnstyledButton,
   Notification,
+  PasswordInput,
 } from "@mantine/core";
 import styles from "../styles/Login.module.css";
-import { useAuth } from "../context/AuthContext";
+
 import { useState } from "react";
 import { IconX } from "@tabler/icons";
-import { userAgentFromString } from "next/server";
+import { useAuth } from "../context/AuthContext";
 
-const Login = () => {
-  const { user, logout, login } = useAuth();
+const Login = ({ usuarios }) => {
+  const { user, login } = useAuth();
+
   const [mensajeError, setMensajeError] = useState(null);
 
   const form = useForm({
@@ -30,23 +32,14 @@ const Login = () => {
       return;
     }
 
-    try {
-      await login(correo, clave);
-    } catch (error) {
-      console.log(error.code);
-      if (error.code === "auth/user-not-found") {
-        setMensajeError(
-          "No pudimos encontrar una cuenta con el correo introducido"
-        );
-        return;
-      }
-      if (error.code === "auth/wrong-password") {
-        setMensajeError("Contraseña incorrecta");
-        return;
-      }
-    }
+    const entrar = await login(correo, clave);
 
-    setMensajeError(null);
+    if (!entrar) {
+      console.log("NO SE ENTRO");
+      setMensajeError("No se pudo ingresar");
+    } else {
+      setMensajeError(null);
+    }
   };
 
   return (
@@ -62,12 +55,12 @@ const Login = () => {
           <p className={styles.formulario__label}>Correo Electrónico</p>
           <TextInput
             placeholder="Correo electrónico..."
+            type="email"
             {...form.getInputProps("correo")}
           />
           <p className={styles.formulario__label}>Contraseña</p>
-          <TextInput
+          <PasswordInput
             placeholder="Contraseña..."
-            type="password"
             {...form.getInputProps("clave")}
           />
 

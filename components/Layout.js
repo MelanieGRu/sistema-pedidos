@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useAuth } from "../context/AuthContext";
+import Login from "./Login";
+
 import {
   AppShell,
   Navbar,
@@ -18,9 +20,9 @@ import {
 import styles from "../styles/Layout.module.css";
 
 const Layout = ({ children }) => {
-  const { user, signup, logout } = useAuth();
   // Router para determinar en qué página nos encontramos
   const router = useRouter();
+  const { user, logout } = useAuth();
 
   // Variables para la responsividad del AppShell
   const theme = useMantineTheme();
