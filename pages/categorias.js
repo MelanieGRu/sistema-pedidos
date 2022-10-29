@@ -1,9 +1,12 @@
-import Layout from "../components/Layout";
+import FormularioCategorias from '../components/FormularioCategorias';
+import Layout from '../components/Layout';
 
 const Categorias = () => {
   return (
     <Layout>
-      <div>Categorias</div>
+      <div>
+        <FormularioCategorias />
+      </div>
     </Layout>
   );
 };
