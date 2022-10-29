@@ -9,6 +9,7 @@
 .formulario__titulo {
   margin-bottom: 1rem;
   text-align: center;
+  color: var(--principal);
 }
 
 .formulario__label__input {
@@ -46,6 +47,15 @@
 .formulario__boton:hover {
   cursor: pointer;
   background-color: rgb(0, 0, 164);
+}
+
+.notificacion {
+  margin: 1rem 0;
+}
+
+.titulo {
+  color: var(--principal);
+  text-align: center;
 }
 
 @media (max-width: 663px) {

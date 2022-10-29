@@ -5,16 +5,18 @@ import Login from "../components/Login";
 import Link from "next/link";
 import Layout from "../components/Layout";
 import styles from "../styles/Index.module.css";
-import { useAuth, AuthContextProvider } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 export default function Home() {
-  return (
-    <AuthContextProvider>
+  const { user, signup } = useAuth();
+
+  if (user === null) {
+    return (
       <Layout>
         <Login />
       </Layout>
-    </AuthContextProvider>
-  );
+    );
+  }
 
   return (
     <Layout>

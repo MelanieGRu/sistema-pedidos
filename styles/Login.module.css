@@ -39,6 +39,10 @@
   background-color: rgb(208, 208, 208);
 }
 
+.notificacion {
+  margin: 1rem 0;
+}
+
 .login {
   display: table-cell;
   position: absolute;
