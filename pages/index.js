@@ -12,11 +12,7 @@ export default function Home({ usuarios }) {
   console.log(usuarios);
 
   if (user === null) {
-    return (
-      <Layout>
-        <Login usuarios={usuarios} />
-      </Layout>
-    );
+    return <Login usuarios={usuarios} />;
   }
 
   return (

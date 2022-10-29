@@ -1,3 +1,6 @@
+.listaCategorias {
+  margin-top: 2rem;
+}
 .formulario {
   border: 0.2rem var(--principal) solid;
   border-radius: 1rem;
