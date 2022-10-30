@@ -19,3 +19,7 @@
 .contenidoForm > button {
   max-width: 10rem;
 }
+
+.formulario__titulo {
+  color: var(--principal);
+}
