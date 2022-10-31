@@ -19,7 +19,7 @@ import ListaUsuarios from "../components/ListaUsuarios";
 const Usuarios = ({ usuarios }) => {
   return (
     <Layout>
-      <FormularioRegistrar usuarios={usuarios} />
+      <FormularioRegistrar />
       <h1 className={styles.titulo}>Cuentas Creadas</h1>
       <ListaUsuarios usuarios={usuarios} />
     </Layout>

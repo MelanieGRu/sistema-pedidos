@@ -17,7 +17,7 @@ import Router from "next/router";
 import Usuarios from "../pages/usuarios";
 import { useAuth } from "../context/AuthContext";
 
-const FormularioRegistrar = ({ usuarios }) => {
+const FormularioRegistrar = () => {
   const { crearCuenta } = useAuth();
   const [mensajeError, setMensajeError] = useState(null);
   const [mensajeCuentaCreada, setMensajeCuentaCreada] = useState(null);
@@ -54,6 +54,9 @@ const FormularioRegistrar = ({ usuarios }) => {
       setMensajeError("Rellenar todos los campos");
       return;
     }
+
+    const res = await fetch("http://localhost:1337/usuarios");
+    const usuarios = await res.json();
 
     usuarios.forEach(function (usuario) {
       if (usuario["correo"] === correo) {
