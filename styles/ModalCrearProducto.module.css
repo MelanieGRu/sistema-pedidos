@@ -1,0 +1,26 @@
+.formulario {
+  text-align: center;
+}
+
+.campos {
+  text-align: left;
+}
+
+.formulario__boton {
+  display: block;
+  width: max-content;
+  padding: 0.2rem 3rem;
+  font-size: 1.4rem;
+  margin: 1rem auto;
+  background-color: var(--principal);
+  color: var(--blanco);
+  border-radius: 0.3rem;
+}
+
+.notificacion {
+  margin: 1rem 0;
+}
+
+.chips {
+  margin: 1rem;
+}

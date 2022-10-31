@@ -1,0 +1,10 @@
+.contenido {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.btnAgregar {
+  max-width: 79rem;
+  display: flex;
+  justify-content: flex-end;
+}

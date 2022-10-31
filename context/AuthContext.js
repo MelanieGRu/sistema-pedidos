@@ -61,6 +61,16 @@ export const AuthContextProvider = ({ children }) => {
       });
   };
 
+  const modificarProducto = (id, nuevosDatos) => {
+    setLoading(true);
+    axios
+      .put(`http://localhost:1337/productos/${id}`, nuevosDatos)
+      .then((response) => {
+        setLoading(false);
+        Router.push('/inventario');
+      });
+  };
+
   const eliminar = (id) => {
     setLoading(true);
     axios.delete(`http://localhost:1337/usuarios/${id}`).then(() => {
@@ -82,6 +92,14 @@ export const AuthContextProvider = ({ children }) => {
     });
   };
 
+  const eliminarProducto = (id) => {
+    setLoading(true);
+    axios.delete(`http://localhost:1337/productos/${id}`).then(() => {
+      setLoading(false);
+      Router.push('/inventario');
+    });
+  };
+
   const crearCuenta = (datos) => {
     setLoading(true);
     axios.post('http://localhost:1337/usuarios', datos).then((response) => {
@@ -100,6 +118,15 @@ export const AuthContextProvider = ({ children }) => {
     });
   };
 
+  const crearProducto = (datos) => {
+    setLoading(true);
+    axios.post('http://localhost:1337/productos', datos).then((response) => {
+      // Recarga la pagina para que se actualize la table de usuarios
+      setLoading(false);
+      Router.push('/inventario');
+    });
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -112,6 +139,9 @@ export const AuthContextProvider = ({ children }) => {
         crearCategoria,
         eliminarCategoria,
         modificarCategoria,
+        eliminarProducto,
+        crearProducto,
+        modificarProducto,
       }}
     >
       {loading ? (
