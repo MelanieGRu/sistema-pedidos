@@ -7,6 +7,7 @@ import {
   Chip,
   UnstyledButton,
   Notification,
+  FileInput,
 } from '@mantine/core';
 import styles from '../styles/ModalCrearProducto.module.css';
 import { useState } from 'react';
@@ -14,7 +15,7 @@ import { useAuth } from '../context/AuthContext';
 
 const ModalCrearProducto = ({ usuario }) => {
   const { crearProducto } = useAuth();
-
+  const [subirImagen, setSubirImagen] = useState(null);
   const [mensajeError, setMensajeError] = useState(null);
 
   const form = useForm({
@@ -24,9 +25,9 @@ const ModalCrearProducto = ({ usuario }) => {
     },
   });
 
-  const { nombre, cantidad } = form.values;
+  const { nombre, cantidad, imagen } = form.values;
 
-  const crear = () => {
+  const crear = async (e) => {
     setMensajeError(null);
     let cuentaExiste = false;
 
@@ -38,6 +39,7 @@ const ModalCrearProducto = ({ usuario }) => {
     const nuevosDatos = {
       nombre: nombre.toUpperCase(),
       stock: cantidad,
+      imagen: imagen,
     };
 
     crearProducto(nuevosDatos);
@@ -61,6 +63,12 @@ const ModalCrearProducto = ({ usuario }) => {
             placeholder='Cantidad del producto'
             label='Cantidad'
             {...form.getInputProps('cantidad')}
+          />
+
+          <FileInput
+            label='Subir icono'
+            placeholder='Icono del producto'
+            accept='image/png,image/jpeg'
           />
         </div>
 

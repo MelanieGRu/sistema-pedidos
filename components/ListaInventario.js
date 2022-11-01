@@ -1,9 +1,10 @@
-import styles from '../styles/ListaUsuarios.module.css';
+import styles from '../styles/ListaInventario.module.css';
 import { ActionIcon, Modal, Button, Group } from '@mantine/core';
 import { useState } from 'react';
 import { IconHighlight, IconTrash } from '@tabler/icons';
 import ModalModificarProducto from './ModalModificarProducto';
 import ModalEliminarProducto from './ModalEliminarProducto';
+import Image from 'next/image';
 
 const ListaInventario = ({ productos }) => {
   const [openedEditar, setOpenedEditar] = useState(false);
@@ -28,6 +29,7 @@ const ListaInventario = ({ productos }) => {
             <th>ID</th>
             <th>Nombre del producto</th>
             <th>Cantidad</th>
+            <th>Icono</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -38,6 +40,13 @@ const ListaInventario = ({ productos }) => {
                 <td>{producto['id']}</td>
                 <td>{producto['nombre']}</td>
                 <td>{producto['stock']}</td>
+                <td className={styles.columnaImagen}>
+                  <Image
+                    width={50}
+                    height={50}
+                    src={`http://localhost:1337${producto['imagen'].url}`}
+                  />
+                </td>
                 <td>
                   <div className={styles.editar}>
                     <ActionIcon onClick={(e) => abrirModalEditar(producto)}>
