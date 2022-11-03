@@ -32,7 +32,7 @@ const Pedido = ({ datos }) => {
         )
         .then((response) => {});
     }
-
+    setOpenedAceptar(false);
     axios
       .put(`http://localhost:1337/pedidos/${datos["id"]}`, nuevoEstado)
       .then((response) => {

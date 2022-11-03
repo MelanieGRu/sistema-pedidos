@@ -30,8 +30,6 @@ export const AuthContextProvider = ({ children }) => {
       }
     });
     setLoading(false);
-    console.log(entro);
-    return entro;
   };
 
   const logout = () => {
@@ -44,7 +42,6 @@ export const AuthContextProvider = ({ children }) => {
     axios
       .put(`http://localhost:1337/usuarios/${id}`, nuevosDatos)
       .then((response) => {
-        setUser(nuevosDatos);
         setLoading(false);
         Router.push("/usuarios");
       });
@@ -60,15 +57,29 @@ export const AuthContextProvider = ({ children }) => {
       });
   };
 
-  const eliminar = (id) => {
+  const eliminar = async (id) => {
     setLoading(true);
+
+    const res = await fetch("http://localhost:1337/pedidos");
+    const pedidos = await res.json();
+
+    for (const pedido of pedidos) {
+      if (pedido["usuario_id"] == id) {
+        axios
+          .delete(`http://localhost:1337/pedidos/${pedido["id"]}`)
+          .then(() => {});
+      }
+    }
     axios.delete(`http://localhost:1337/usuarios/${id}`).then(() => {
       setLoading(false);
-      if (user["id"] === id) {
-        setUser(null);
-        Router.push("/");
-        return;
+      if (user !== null) {
+        if (user["id"] === id) {
+          setUser(null);
+          Router.push("/");
+          return;
+        }
       }
+
       Router.push("/usuarios");
     });
   };
