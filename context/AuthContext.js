@@ -10,7 +10,6 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
-  console.log(user);
 
   const login = async (correo, clave) => {
     const res = await fetch("http://localhost:1337/usuarios");
