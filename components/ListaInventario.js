@@ -29,6 +29,7 @@ const ListaInventario = ({ productos }) => {
             <th>ID</th>
             <th>Nombre del producto</th>
             <th>Cantidad</th>
+            <th>Categoría</th>
             <th>Icono</th>
             <th>Acciones</th>
           </tr>
@@ -40,12 +41,16 @@ const ListaInventario = ({ productos }) => {
                 <td>{producto['id']}</td>
                 <td>{producto['nombre']}</td>
                 <td>{producto['stock']}</td>
+                <td>{producto['categoria_id']}</td>
                 <td className={styles.columnaImagen}>
-                  <Image
-                    width={50}
-                    height={50}
-                    src={`http://localhost:1337${producto['imagen'].url}`}
-                  />
+                  {
+                    <Image
+                      width={50}
+                      height={50}
+                      src={`http://localhost:1337${producto['imagen'].url}`}
+                      alt='Imagen de producto'
+                    />
+                  }
                 </td>
                 <td>
                   <div className={styles.editar}>

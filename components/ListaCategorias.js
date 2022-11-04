@@ -1,9 +1,7 @@
 import styles from '../styles/ListaCategorias.module.css';
-import { ActionIcon, Modal, Button, Group } from '@mantine/core';
+import { ActionIcon, Modal } from '@mantine/core';
 import { useState } from 'react';
 import { IconHighlight, IconTrash } from '@tabler/icons';
-import ModalModificarUsuario from './ModalModificarUsuario';
-import ModalEliminarUsuario from './ModalEliminarUsuario';
 import ModalEliminarCategoria from './ModalEliminarCategoria';
 import ModalModificarCategoria from './ModalModificarCategoria';
 

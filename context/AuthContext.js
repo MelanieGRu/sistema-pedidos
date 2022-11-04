@@ -118,12 +118,22 @@ export const AuthContextProvider = ({ children }) => {
     });
   };
 
+  // const crearProducto = (datos) => {
+  //   setLoading(true);
+  //   axios.post('http://localhost:1337/productos', datos).then((response) => {
+  //     // Recarga la pagina para que se actualize la table de usuarios
+  //     setLoading(false);
+  //     Router.push('/inventario');
+  //   });
+  // };
+
   const crearProducto = (datos) => {
     setLoading(true);
-    axios.post('http://localhost:1337/productos', datos).then((response) => {
-      // Recarga la pagina para que se actualize la table de usuarios
-      setLoading(false);
-      Router.push('/inventario');
+    axios({
+      method: 'post',
+      url: 'http://localhost:1337/productos',
+      data: datos,
+      headers: {},
     });
   };
 
