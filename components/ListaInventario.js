@@ -1,10 +1,10 @@
-import styles from '../styles/ListaInventario.module.css';
-import { ActionIcon, Modal, Button, Group } from '@mantine/core';
-import { useState } from 'react';
-import { IconHighlight, IconTrash } from '@tabler/icons';
-import ModalModificarProducto from './ModalModificarProducto';
-import ModalEliminarProducto from './ModalEliminarProducto';
-import Image from 'next/image';
+import styles from "../styles/ListaInventario.module.css";
+import { ActionIcon, Modal, Button, Group } from "@mantine/core";
+import { useState } from "react";
+import { IconHighlight, IconTrash } from "@tabler/icons";
+import ModalModificarProducto from "./ModalModificarProducto";
+import ModalEliminarProducto from "./ModalEliminarProducto";
+import Image from "next/image";
 
 const ListaInventario = ({ productos }) => {
   const [openedEditar, setOpenedEditar] = useState(false);
@@ -38,17 +38,17 @@ const ListaInventario = ({ productos }) => {
           {productos.map((producto) => {
             return (
               <tr key={producto.id}>
-                <td>{producto['id']}</td>
-                <td>{producto['nombre']}</td>
-                <td>{producto['stock']}</td>
-                <td>{producto['categoria_id']}</td>
+                <td>{producto["id"]}</td>
+                <td>{producto["nombre"]}</td>
+                <td>{producto["stock"]}</td>
+                <td>{producto["categoria_id"]}</td>
                 <td className={styles.columnaImagen}>
                   {
                     <Image
                       width={50}
                       height={50}
-                      src={`http://localhost:1337${producto['imagen'].url}`}
-                      alt='Imagen de producto'
+                      src={`/../public/images/${producto["imagen"]}`}
+                      alt="Imagen de producto"
                     />
                   }
                 </td>
@@ -58,7 +58,7 @@ const ListaInventario = ({ productos }) => {
                       <IconHighlight size={18} />
                     </ActionIcon>
                     <ActionIcon onClick={(e) => abrirModalEliminar(producto)}>
-                      <IconTrash size={18} color='red' />
+                      <IconTrash size={18} color="red" />
                     </ActionIcon>
                   </div>
                 </td>

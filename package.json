@@ -29,7 +29,10 @@
     "embla-carousel-react": "^7.0.3",
     "firebase": "^9.13.0",
     "form-data": "^4.0.0",
+    "formidable": "^2.0.1",
+    "multer": "*",
     "next": "13.0.0",
+    "next-connect": "^0.13.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
