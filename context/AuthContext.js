@@ -10,6 +10,7 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
+  console.log(user);
 
   const login = async (correo, clave) => {
     const res = await fetch("http://localhost:1337/usuarios");
@@ -30,6 +31,8 @@ export const AuthContextProvider = ({ children }) => {
       }
     });
     setLoading(false);
+    console.log(entro);
+    return entro;
   };
 
   const logout = () => {
@@ -42,6 +45,7 @@ export const AuthContextProvider = ({ children }) => {
     axios
       .put(`http://localhost:1337/usuarios/${id}`, nuevosDatos)
       .then((response) => {
+        setUser(nuevosDatos);
         setLoading(false);
         Router.push("/usuarios");
       });
@@ -57,29 +61,25 @@ export const AuthContextProvider = ({ children }) => {
       });
   };
 
-  const eliminar = async (id) => {
+  const modificarProducto = (id, nuevosDatos) => {
     setLoading(true);
+    axios
+      .put(`http://localhost:1337/productos/${id}`, nuevosDatos)
+      .then((response) => {
+        setLoading(false);
+        Router.push("/inventario");
+      });
+  };
 
-    const res = await fetch("http://localhost:1337/pedidos");
-    const pedidos = await res.json();
-
-    for (const pedido of pedidos) {
-      if (pedido["usuario_id"] == id) {
-        axios
-          .delete(`http://localhost:1337/pedidos/${pedido["id"]}`)
-          .then(() => {});
-      }
-    }
+  const eliminar = (id) => {
+    setLoading(true);
     axios.delete(`http://localhost:1337/usuarios/${id}`).then(() => {
       setLoading(false);
-      if (user !== null) {
-        if (user["id"] === id) {
-          setUser(null);
-          Router.push("/");
-          return;
-        }
+      if (user["id"] === id) {
+        setUser(null);
+        Router.push("/");
+        return;
       }
-
       Router.push("/usuarios");
     });
   };
@@ -89,6 +89,14 @@ export const AuthContextProvider = ({ children }) => {
     axios.delete(`http://localhost:1337/categorias/${id}`).then(() => {
       setLoading(false);
       Router.push("/categorias");
+    });
+  };
+
+  const eliminarProducto = (id) => {
+    setLoading(true);
+    axios.delete(`http://localhost:1337/productos/${id}`).then(() => {
+      setLoading(false);
+      Router.push("/inventario");
     });
   };
 
@@ -110,8 +118,23 @@ export const AuthContextProvider = ({ children }) => {
     });
   };
 
-  const cambiarUsuario = (usuario) => {
-    setUser(usuario);
+  // const crearProducto = (datos) => {
+  //   setLoading(true);
+  //   axios.post('http://localhost:1337/productos', datos).then((response) => {
+  //     // Recarga la pagina para que se actualize la table de usuarios
+  //     setLoading(false);
+  //     Router.push('/inventario');
+  //   });
+  // };
+
+  const crearProducto = (datos) => {
+    setLoading(true);
+
+    axios.post("http://localhost:1337/productos", datos).then((response) => {
+      // Recarga la pagina para que se actualize la table de usuarios
+      setLoading(false);
+      Router.push("/inventario");
+    });
   };
 
   return (
@@ -126,6 +149,9 @@ export const AuthContextProvider = ({ children }) => {
         crearCategoria,
         eliminarCategoria,
         modificarCategoria,
+        eliminarProducto,
+        crearProducto,
+        modificarProducto,
       }}
     >
       {loading ? (
