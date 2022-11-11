@@ -19,10 +19,14 @@ import {
 } from "@mantine/core";
 import styles from "../styles/Layout.module.css";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, usuarios }) => {
   // Router para determinar en qué página nos encontramos
   const router = useRouter();
   const { user, logout } = useAuth();
+
+  if (user === null) {
+    return <Login usuarios={usuarios} />;
+  }
 
   // Variables para la responsividad del AppShell
   const theme = useMantineTheme();
@@ -142,3 +146,14 @@ const Layout = ({ children }) => {
 };
 
 export default Layout;
+
+export async function getStaticProps() {
+  const res = await fetch("http://localhost:1337/usuarios");
+  const usuarios = await res.json();
+
+  return {
+    props: {
+      usuarios,
+    },
+  };
+}
