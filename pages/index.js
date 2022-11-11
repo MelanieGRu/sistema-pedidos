@@ -1,19 +1,12 @@
-import { Button, Card, Grid, Group, Text, Title } from "@mantine/core";
-import Head from "next/head";
+import { Button, Card, Group, Text, Title } from "@mantine/core";
+
 import Image from "next/image";
-import Login from "../components/Login";
+
 import Link from "next/link";
 import Layout from "../components/Layout";
 import styles from "../styles/Index.module.css";
-import { useAuth } from "../context/AuthContext";
 
 export default function Home({ usuarios }) {
-  const { user } = useAuth();
-
-  if (user === null) {
-    return <Login usuarios={usuarios} />;
-  }
-
   return (
     <Layout>
       <div className={styles.cuadros}>

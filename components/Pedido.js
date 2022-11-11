@@ -119,7 +119,9 @@ const Pedido = ({ datos }) => {
         <p className={styles.pedido__info}>{datos["telefono"]}</p>
         <p className={styles.pedido__info}>{datos["perfil"]}</p>
       </div>
-      <p className={styles.pedido__datos__titulo}>Productos</p>
+      <p className={styles.pedido__datos__titulo}>
+        {datos["lineas"].length > 0 ? "Productos" : datos["titulo"]}
+      </p>
       <div className={styles.pedido__productos}>
         {datos["lineas"].map((linea) => (
           <p

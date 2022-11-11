@@ -89,3 +89,14 @@ const Login = ({ usuarios }) => {
 };
 
 export default Login;
+
+export async function getStaticProps() {
+  const res = await fetch("http://localhost:1337/usuarios");
+  const usuarios = await res.json();
+
+  return {
+    props: {
+      usuarios,
+    },
+  };
+}

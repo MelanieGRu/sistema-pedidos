@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useAuth } from "../context/AuthContext";
@@ -21,16 +21,17 @@ import styles from "../styles/Layout.module.css";
 
 const Layout = ({ children, usuarios }) => {
   // Router para determinar en qué página nos encontramos
-  const router = useRouter();
   const { user, logout } = useAuth();
-
-  if (user === null) {
-    return <Login usuarios={usuarios} />;
-  }
+  const router = useRouter();
 
   // Variables para la responsividad del AppShell
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
+
+  if (user === null || user == undefined) {
+    return <Login />;
+  }
+
   return (
     <AppShell
       styles={{

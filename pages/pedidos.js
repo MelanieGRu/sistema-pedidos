@@ -63,6 +63,7 @@ export async function getStaticProps() {
       comentario: pedido["comentario"],
       productos: productos,
       respuesta: pedido["respuesta"],
+      titulo: pedido["titulo"],
     });
   }
 

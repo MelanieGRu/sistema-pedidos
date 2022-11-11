@@ -1,15 +1,3 @@
-import { useForm } from "@mantine/form";
-import { IconX, IconCheck } from "@tabler/icons";
-import {
-  NumberInput,
-  TextInput,
-  Button,
-  UnstyledButton,
-  Chip,
-  Notification,
-} from "@mantine/core";
-import { useState } from "react";
-
 import Layout from "../components/Layout";
 import styles from "../styles/Usuarios.module.css";
 
