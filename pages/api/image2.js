@@ -9,18 +9,19 @@ export const config = {
   },
 };
 
-const readFile = (req, saveLocally, date) => {
+const readFile = (req, saveLocally) => {
   const options = {};
-
   if (saveLocally) {
-    options.uploadDir = path.join(process.cwd(), "/public/images");
+    options.uploadDir = path.join(
+      process.cwd(),
+      "/../sistema-tienda/public/images"
+    );
     options.filename = (next, ext, path, form) => {
       return path.originalFilename;
     };
   }
 
   const form = formidable(options);
-
   return new Promise((resolve, reject) => {
     form.parse(req, (err, fields, files) => {
       if (err) reject(err);
@@ -35,8 +36,7 @@ const handler = async (req, res) => {
   } catch (error) {
     await fs.mkdir(path.join(process.cwd() + "/public" + "/images"));
   }
-  const date = Date.now().toString();
-  const archivo = await readFile(req, true, date);
+  const archivo = await readFile(req, true);
   res.json({ nombre: archivo.files.myImage["newFilename"] });
 };
 
