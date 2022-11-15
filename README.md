@@ -30,4 +30,6 @@ Para aprender más sobre Next.js, Puedes consultar los siguientes recursos:
 
 La forma más fácil de desplegar tu app Next.js es usando [Plataforma Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) de los creadores de Next.js.
 
-Si te interesa ver la documentacion completa de este proyecto puedes revisar la [Wiki sistema-pedidos](https://github.com/MelanieGRu/sistema-pedidos/wiki) para más detalles.
+## Documentación 
+
+Si te interesa ver la documentación completa de este proyecto puedes revisar la [Wiki sistema-pedidos](https://github.com/MelanieGRu/sistema-pedidos/wiki) para más detalles.
