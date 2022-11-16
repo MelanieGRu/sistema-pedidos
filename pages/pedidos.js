@@ -13,7 +13,7 @@ const Pedidos = ({ datos }) => {
 
   return (
     <Layout>
-      {!datos
+      {!datosimage.png
         ? null
         : datos.map((dato) => <Pedido datos={dato} key={dato["id"]} />)}
     </Layout>
