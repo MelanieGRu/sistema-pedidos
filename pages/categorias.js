@@ -1,5 +1,5 @@
-import FormularioCategorias from '../components/FormularioCategorias';
-import Layout from '../components/Layout';
+import FormularioCategorias from "../components/FormularioCategorias";
+import Layout from "../components/Layout";
 
 const Categorias = ({ categorias }) => {
   return (
@@ -14,7 +14,7 @@ const Categorias = ({ categorias }) => {
 export default Categorias;
 
 export async function getStaticProps() {
-  const res = await fetch('http://localhost:1337/categorias');
+  const res = await fetch("http://localhost:1337/categorias");
   const categorias = await res.json();
 
   return {

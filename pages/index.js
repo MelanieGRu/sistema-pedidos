@@ -1,32 +1,32 @@
-import { Button, Card, Grid, Group, Text, Title } from '@mantine/core';
-import Head from 'next/head';
+import {
+  AspectRatio,
+  Button,
+  Card,
+  CardSection,
+  Group,
+  Text,
+  Title,
+} from '@mantine/core';
+
 import Image from 'next/image';
-import Login from '../components/Login';
+
 import Link from 'next/link';
 import Layout from '../components/Layout';
 import styles from '../styles/Index.module.css';
-import { useAuth } from '../context/AuthContext';
 
 export default function Home({ usuarios }) {
-  const { user } = useAuth();
-  console.log(usuarios);
-
-  if (user === null) {
-    return <Login usuarios={usuarios} />;
-  }
-
   return (
     <Layout>
       <div className={styles.cuadros}>
         <Card className={styles.card} shadow='sm' p='lg' radius='md' withBorder>
-          <Card.Section>
+          <CardSection>
             <Image
-              src='/assets/img/inventario.jpg'
+              src='/assets/img/inventario.png'
               width={1920}
               height={1080}
               alt='Norway'
             />
-          </Card.Section>
+          </CardSection>
 
           <Group position='apart' mt='md' mb='xs'>
             <Title>Inventario</Title>
@@ -44,14 +44,14 @@ export default function Home({ usuarios }) {
           </Link>
         </Card>
         <Card className={styles.card} shadow='sm' p='lg' radius='md' withBorder>
-          <Card.Section>
+          <CardSection>
             <Image
-              src='/assets/img/categorias.jpg'
+              src='/assets/img/categorias.png'
               width={1920}
               height={1080}
               alt='Norway'
             />
-          </Card.Section>
+          </CardSection>
 
           <Group position='apart' mt='md' mb='xs'>
             <Title>Categorías</Title>
@@ -69,14 +69,14 @@ export default function Home({ usuarios }) {
           </Link>
         </Card>
         <Card className={styles.card} shadow='sm' p='lg' radius='md' withBorder>
-          <Card.Section>
+          <CardSection>
             <Image
-              src='/assets/img/pedidos.jpg'
+              src='/assets/img/pedidos.png'
               width={1920}
               height={1080}
               alt='Norway'
             />
-          </Card.Section>
+          </CardSection>
 
           <Group position='apart' mt='md' mb='xs'>
             <Title>Pedidos</Title>
@@ -94,15 +94,15 @@ export default function Home({ usuarios }) {
           </Link>
         </Card>
         <Card className={styles.card} shadow='sm' p='lg' radius='md' withBorder>
-          <Card.Section>
+          <CardSection>
             <Image
-              src='/assets/img/usuarios.jpg'
+              src='/assets/img/usuarios.png'
               width={1920}
               height={1080}
               radius='md'
               alt='Norway'
             />
-          </Card.Section>
+          </CardSection>
 
           <Group position='apart' mt='md' mb='xs'>
             <Title>Usuarios</Title>

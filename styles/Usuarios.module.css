@@ -1,9 +1,27 @@
+.contenido__usuarios {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 .formulario {
   border: 0.2rem var(--principal) solid;
   border-radius: 1rem;
   padding: 1.3rem;
-  width: 40rem;
   margin: auto;
+  width: 35rem;
+}
+
+@media (min-width: 665px) {
+  .formulario {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .formulario {
+    width: 40rem;
+  }
 }
 
 .formulario__titulo {

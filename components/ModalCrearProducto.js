@@ -54,7 +54,9 @@ const ModalCrearProducto = ({ categorias }) => {
     // GUARDAR IMAGEN EN ARCHIVO LOCAL
     const formData = new FormData();
     formData.append("myImage", archivo);
+
     const { data } = await axios.post("/api/image", formData);
+    const { data2 } = await axios.post("/api/image2", formData);
 
     const datos = {
       nombre: nombre.toUpperCase(),
