@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import { useAuth } from "../context/AuthContext";
-import Login from "./Login";
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { useAuth } from '../context/AuthContext';
+import Login from './Login';
 
 import {
   AppShell,
@@ -16,8 +16,8 @@ import {
   Burger,
   useMantineTheme,
   Divider,
-} from "@mantine/core";
-import styles from "../styles/Layout.module.css";
+} from '@mantine/core';
+import styles from '../styles/Layout.module.css';
 
 const Layout = ({ children, usuarios }) => {
   // Router para determinar en qué página nos encontramos
@@ -39,21 +39,21 @@ const Layout = ({ children, usuarios }) => {
           background: theme.colors.gray[0],
         },
       }}
-      navbarOffsetBreakpoint="sm"
-      asideOffsetBreakpoint="sm"
+      navbarOffsetBreakpoint='sm'
+      asideOffsetBreakpoint='sm'
       navbar={
         <Navbar
-          p="md"
-          hiddenBreakpoint="sm"
+          p='md'
+          hiddenBreakpoint='sm'
           hidden={!opened}
           width={{ sm: 200, lg: 300 }}
         >
           {/* Botones del menu en AppShell que
            nos redirigen a otras pantallas */}
-          <Link href="/">
+          <Link href='/'>
             <div
               className={
-                router.pathname === "/"
+                router.pathname === '/'
                   ? styles.appshell__boton__seleccionado
                   : styles.appshell__boton
               }
@@ -62,10 +62,10 @@ const Layout = ({ children, usuarios }) => {
             </div>
           </Link>
 
-          <Link href="/inventario">
+          <Link href='/inventario'>
             <div
               className={
-                router.pathname === "/inventario"
+                router.pathname === '/inventario'
                   ? styles.appshell__boton__seleccionado
                   : styles.appshell__boton
               }
@@ -74,10 +74,10 @@ const Layout = ({ children, usuarios }) => {
             </div>
           </Link>
 
-          <Link href="/categorias">
+          <Link href='/categorias'>
             <div
               className={
-                router.pathname === "/categorias"
+                router.pathname === '/categorias'
                   ? styles.appshell__boton__seleccionado
                   : styles.appshell__boton
               }
@@ -86,10 +86,10 @@ const Layout = ({ children, usuarios }) => {
             </div>
           </Link>
 
-          <Link href="/pedidos">
+          <Link href='/pedidos'>
             <div
               className={
-                router.pathname === "/pedidos"
+                router.pathname === '/pedidos'
                   ? styles.appshell__boton__seleccionado
                   : styles.appshell__boton
               }
@@ -98,10 +98,10 @@ const Layout = ({ children, usuarios }) => {
             </div>
           </Link>
 
-          <Link href="/usuarios">
+          <Link href='/usuarios'>
             <div
               className={
-                router.pathname === "/usuarios"
+                router.pathname === '/usuarios'
                   ? styles.appshell__boton__seleccionado
                   : styles.appshell__boton
               }
@@ -123,19 +123,19 @@ const Layout = ({ children, usuarios }) => {
       header={
         <Header height={50}>
           <div className={styles.layout__header}>
-            <MediaQuery largerThan="sm" styles={{ display: "none" }}>
+            <MediaQuery largerThan='sm' styles={{ display: 'none' }}>
               <Burger
                 opened={opened}
                 onClick={() => setOpened((o) => !o)}
-                size="sm"
+                size='sm'
                 color={theme.colors.gray[6]}
-                mr="xl"
+                mr='xl'
               />
             </MediaQuery>
             {/* Contenido del header de
             AppShell */}
             <Text className={styles.layout__header__texto}>
-              <Link href="/">Control de Inventario</Link>
+              <Link href='/'>Control de Inventario</Link>
             </Text>
           </div>
         </Header>
@@ -149,7 +149,7 @@ const Layout = ({ children, usuarios }) => {
 export default Layout;
 
 export async function getStaticProps() {
-  const res = await fetch("http://localhost:1337/usuarios");
+  const res = await fetch('http://localhost:1337/usuarios');
   const usuarios = await res.json();
 
   return {
