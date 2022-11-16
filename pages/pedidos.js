@@ -3,7 +3,8 @@ import Pedido from "../components/Pedido";
 import styles from "../styles/Pedido.module.css";
 
 const Pedidos = ({ datos }) => {
-  if (!datos) {
+  
+  if (datos.length === 0) {
     return (
       <Layout>
         <h1 className={styles.titulo}>No Existen Pedidos</h1>
