@@ -17,6 +17,7 @@ export const AuthContextProvider = ({ children }) => {
     }
     setLoading(false);
   }, []);
+  console.log(user);
 
   const [loading, setLoading] = useState(false);
 
